@@ -1,0 +1,20 @@
+	bp_clock24mhz: clock24mhz {
+		compatible = "fixed-clock";
+		#clock-cells = <0>;
+		clock-frequency = <24000000>;
+		clock-output-names = "bp:clock24mhz";
+	};
+
+	bp_serial0: uart@1c090000 {
+		compatible = "arm,pl011", "arm,primecell";
+		reg = <0x0 0x1c090000 0x0 0x1000>;
+		interrupts = <GIC_SPI 5 IRQ_TYPE_LEVEL_HIGH>;
+		clocks = <&bp_clock24mhz>, <&bp_clock24mhz>;
+		clock-names = "uartclk", "apb_pclk";
+	};
+
+	memory@80000000 {
+		device_type = "memory";
+		reg = <0x00000000 0x80000000 0 0x80000000>,
+		      <0x00000008 0x80000000 0 0x80000000>;
+	};

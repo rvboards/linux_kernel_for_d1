@@ -1,0 +1,72 @@
+RWNX_VERS_NUM=6.4.3.0
+
+CONFIG_PLATFORM_NANOPI_M4 ?= n
+CONFIG_PLATFORM_ALLWINNER ?= y
+CONFIG_PLATFORM_INGENIC_T20 ?= n
+
+# Support of bootrom start
+CONFIG_START_FROM_BOOTROM = y
+
+# Support of pmic setting, new version bootrom avaliable
+CONFIG_PMIC_SETTING ?=y
+
+# ROM patch enabled option
+CONFIG_ROM_PATCH_EN ?=n
+
+#
+# WAITING FOR KCONFIG {
+#
+CONFIG_RWNX_SOFTMAC ?= n
+CONFIG_RWNX_FULLMAC ?= y
+CONFIG_RWNX_FHOST ?= n
+
+#
+# DEBUG OPTIONS
+CONFIG_RWNX_UM_HELPER_DFLT ?= "/dini/dini_bin/rwnx_umh.sh"
+CONFIG_AIC_FW_PATH = "/vendor/etc/firmware"
+export CONFIG_AIC_FW_PATH
+
+#
+# FW ARCH:
+CONFIG_RWNX_SDM ?= n
+CONFIG_RWNX_TL4 ?= n
+
+# IPC version
+CONFIG_RWNX_OLD_IPC ?= n
+
+# Support of P2P DebugFS for enabling/disabling NoA and OppPS
+CONFIG_RWNX_P2P_DEBUGFS ?= y
+
+#
+# } // WAITING FOR KCONFIG
+#
+
+subdir-ccflags-$(CONFIG_DEBUG_FS) += -DCONFIG_RWNX_DEBUGFS
+subdir-ccflags-$(CONFIG_DEBUG_FS) += -DCONFIG_RWNX_UM_HELPER_DFLT=\"$(CONFIG_RWNX_UM_HELPER_DFLT)\"
+subdir-ccflags-$(CONFIG_RWNX_P2P_DEBUGFS) += -DCONFIG_RWNX_P2P_DEBUGFS
+
+# FW VARS
+subdir-ccflags-y += -DNX_VIRT_DEV_MAX=4
+subdir-ccflags-y += -DNX_REMOTE_STA_MAX=10
+subdir-ccflags-y += -DNX_MU_GROUP_MAX=62
+subdir-ccflags-y += -DNX_TXDESC_CNT=64
+subdir-ccflags-y += -DNX_TX_MAX_RATES=4
+subdir-ccflags-y += -DNX_CHAN_CTXT_CNT=3
+
+# FW ARCH:
+subdir-ccflags-$(CONFIG_RWNX_SDM) += -DCONFIG_RWNX_SDM
+subdir-ccflags-$(CONFIG_RWNX_TL4) += -DCONFIG_RWNX_TL4
+subdir-ccflags-$(CONFIG_RWNX_OLD_IPC) += -DCONFIG_RWNX_OLD_IPC
+subdir-ccflags-$(CONFIG_PLATFORM_NANOPI_M4) += -DCONFIG_NANOPI_M4
+subdir-ccflags-$(CONFIG_PLATFORM_INGENIC_T20) += -DCONFIG_INGENIC_T20
+subdir-ccflags-$(CONFIG_PLATFORM_ALLWINNER) += -DCONFIG_PLATFORM_ALLWINNER
+subdir-ccflags-$(CONFIG_START_FROM_BOOTROM) += -DCONFIG_START_FROM_BOOTROM
+subdir-ccflags-$(CONFIG_PMIC_SETTING) += -DCONFIG_PMIC_SETTING
+subdir-ccflags-$(CONFIG_ROM_PATCH_EN) += -DCONFIG_ROM_PATCH_EN
+subdir-ccflags-$(CONFIG_PLATFORM_ALLWINNER) += -DCONFIG_HE_FOR_OLD_KERNEL
+
+obj-$(CONFIG_RWNX_SOFTMAC) += softmac/
+obj-$(CONFIG_RWNX_FULLMAC) += fullmac/
+obj-$(CONFIG_RWNX_FHOST)   += fhost/
+
+

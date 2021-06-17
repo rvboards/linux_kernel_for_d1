@@ -1,0 +1,44 @@
+# SPDX-License-Identifier: GPL-2.0-only
+
+menu "sunxi Gorilla ESL platform"
+
+config SUNXI_GORILLA
+	bool "sunxi Gorilla ESL platform support"
+	default n
+	help
+	  sunxi Gorilla ESL platform support
+
+config GORILLA_MEMC
+	tristate "Gorilla memory controller driver"
+	default n
+	depends on SUNXI_GORILLA
+	help
+	  sunxi Gorilla memory controller driver
+
+config GORILLA_EXTRA_MEM
+	tristate "Gorilla extra memory driver"
+	default n
+	depends on SUNXI_GORILLA
+	select GORILLA_MEMC
+	help
+	  This driver maps physical memory to the kernel. In this way, the
+	  memory can be used as a normal storage media from either kernel or
+	  user space. In other words, you can read/write the memory just like
+	  reading/writing registers. It's useful when you want to access
+	  physical memory from user space, e.g. when testing an extra DDR.
+
+config GORILLA_NSI
+	tristate "Gorilla NSI driver"
+	default n
+	depends on SUNXI_GORILLA
+	help
+	  sunxi Gorilla NSI driver
+
+config GORILLA_DE_TCON
+	tristate "Gorilla DE/TCON driver"
+	default n
+	depends on SUNXI_GORILLA
+	help
+	  sunxi Gorilla DE/TCON driver
+
+endmenu

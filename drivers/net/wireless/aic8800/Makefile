@@ -1,0 +1,3 @@
+obj-$(CONFIG_AIC8800_BTSDIO_SUPPORT)    += aic8800_btsdio/
+obj-$(CONFIG_AIC8800_WLAN_SUPPORT) += aic8800_fdrv/
+obj-$(CONFIG_AIC_WLAN_SUPPORT) += aic8800_bsp/

@@ -1,0 +1,56 @@
+#
+# sensor driver configuration
+#
+menuconfig INPUT_SENSOR
+	bool "Sensors"
+	help
+	  Say Y here, and a list of supported sensor will be displayed.
+	  This option doesn't affect the kernel.
+
+	  If unsure, say Y.
+
+if INPUT_SENSOR
+config SENSORS_SC7A20
+        tristate "SC7A20 3-Axis Orientation/Motion Detection Sensor Support"
+        select I2C
+        depends on INPUT_SENSOR
+        default n
+        help
+          If you say yes here you get support for the Freescale 3-Axis
+          Orientation/Motion Detection Sensor.
+
+config SENSORS_MIR3DA
+        tristate "mir3da 3-Axis Orientation/Motion Detection Sensor Support"
+        select I2C
+        depends on INPUT_SENSOR
+        default n
+        help
+          If you say yes here you get support for the mir3da 3-Axis
+          Orientation/Motion Detection Sensor.
+
+config STK3X1X
+	tristate "stl3x1x Light driver support"
+	depends on I2C
+	default n
+	help
+		This driver implements light device driver.
+		It communicates with a back-end in another domain.
+		To compile this driver as a module, choose M here: the
+			module will be called xen-kbdfront.
+
+config SUNXI_TPADC
+        tristate "sunxi tpadc driver support"
+        depends on INPUT_SENSOR
+        default n
+        help
+          If you say yes here you get support for the tpadc collect analog input
+
+config SUNXI_GPADC
+        tristate "sunxi gpadc driver support"
+        depends on INPUT_SENSOR
+        default n
+        help
+          If you say yes here you get support for the gpadc collect analog input
+
+
+endif
