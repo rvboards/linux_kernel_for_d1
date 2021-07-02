@@ -1,0 +1,44 @@
+/dts-v1/;
+
+#include "fvp-base-aemv8a-aemv8a-minimal.dtsi"
+
+/* /memreserve/ 0x880000000 0x80000000; */
+
+/ {
+	/* FVP High Memory */
+	memory@880000000 {
+		device_type = "memory";
+		reg = <0x00000008 0x80000000 0 0x80000000>;
+		status = "disabled";
+	};
+
+	/* NSI on FPGA board */
+	gorilla-nsi@3100000 {
+		compatible = "sunxi,gorilla-nsi";
+		//reg = <0x0 0x03100000 0x0 0x10>;
+		status = "okay";
+	};
+
+	/* Memory controller on FPGA board */
+	memc0: gorilla-memc@4800000 {
+		compatible = "sunxi,gorilla-memc";
+		//reg = <0x0 0x04800000 0x0 0x30000>;
+		status = "okay";
+	};
+
+	/* DDR on FPGA board */
+	gorilla-extra-mem@40000000 {
+		compatible = "sunxi,gorilla-extra-mem";
+		reg = <0x0 0x40000000 0x0 0x40000000>;
+		rely-on = <&memc0>;  /* Make sure `gorilla-memc` is probed before @TODO: NEED TO VERIFY */
+		status = "okay";
+	};
+
+	/* DE/TCON on FPGA board */
+	gorilla-de-tcon@6511000 {
+		compatible = "sunxi,gorilla-de-tcon";
+		reg = <0x0 0x06511000 0x0 0x10>;  /* AW1855 TCON */
+		interrupts = <GIC_SPI 168 IRQ_TYPE_EDGE_RISING>;  /* TCON IRQ, Hardware interrupt number: 200 */
+		status = "okay";
+	};
+};

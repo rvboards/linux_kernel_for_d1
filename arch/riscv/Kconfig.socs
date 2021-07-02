@@ -1,0 +1,90 @@
+menu "SoC selection"
+
+config SOC_SIFIVE
+       bool "SiFive SoCs"
+       select SERIAL_SIFIVE
+       select SERIAL_SIFIVE_CONSOLE
+       select CLK_SIFIVE
+       select CLK_SIFIVE_FU540_PRCI
+       select SIFIVE_PLIC
+       help
+         This enables support for SiFive SoC platform hardware.
+
+config RISCV_SUNXI
+       bool
+
+config ARCH_SUNXI
+       bool "Allwinner RISC-V SoC Family"
+       select RISCV_SUNXI
+       select CPU_PM if CPU_IDLE
+       help
+         This enables support for SUNXI SoC platform hardware.
+
+# Select the board between FPGA and EVB
+
+choice
+      prompt "Allwinner development Board"
+      depends on ARCH_SUNXI
+      default FPGA_V4_PLATFORM
+
+config FPGA_V4_PLATFORM
+       bool "FPGAv4 board"
+       help
+         Support for Allwinner's FPGAv4 board
+
+config FPGA_V7_PLATFORM
+       bool "FPGAv7 board"
+       help
+         Support for Allwinner's FPGAv4 board
+
+config EVB_PLATFORM
+       bool "EVB board"
+       help
+         Support for Allwinner's EVB board
+endchoice
+
+if ARCH_SUNXI
+choice
+	prompt "Select the architecture of SoC"
+	default ARCH_SUN20I
+	help
+	  Select the architecture for SoC
+	  sunxi
+	  `-- sun20i ----- C906 based Family SoCs
+
+	config ARCH_SUN20I
+	bool "Allwinner SUN20I"
+endchoice
+
+if ARCH_SUN20I
+choice
+	prompt "Select the wafer with arch sun20i"
+	default ARCH_SUN20IW1
+	help
+	  Select the wafer with arch sun20i
+
+config ARCH_SUN20IW1
+	bool "Allwinner SUN20IW1 SoCs"
+	help
+	  Support for Allwinner SUN20IW1 SoC family
+
+endchoice
+endif
+
+if ARCH_SUN20IW1
+choice
+	prompt "Select the wafer with arch sun20iw1"
+	default ARCH_SUN20IW1P1
+	help
+	  Select the wafer with arch sun20iw1
+
+config ARCH_SUN20IW1P1
+	bool "Allwinner SUN20IW1P1 SoCs"
+	help
+	  Support for Allwinner SUN20IW1P1 SoC family
+
+endchoice
+endif
+endif
+
+endmenu

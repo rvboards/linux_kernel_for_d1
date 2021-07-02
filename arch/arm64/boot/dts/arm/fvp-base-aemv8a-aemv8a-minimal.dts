@@ -1,0 +1,3 @@
+/dts-v1/;
+
+#include "fvp-base-aemv8a-aemv8a-minimal.dtsi"
