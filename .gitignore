@@ -48,7 +48,6 @@
 Module.symvers
 modules.builtin
 modules.order
-*.img
 
 #
 # Top-level generic files

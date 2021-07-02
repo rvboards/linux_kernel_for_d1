@@ -2084,10 +2084,10 @@ static s32 display_fb_request(u32 fb_id, struct disp_fb_create_info *fb_para)
 #endif
 			{
 
-config.info.screen_win.width =1920;
-config.info.screen_win.height =1080;
-/*
-				config.info.screen_win.width =
+config.info.screen_win.width =1280;
+config.info.screen_win.height =720;
+
+/*				config.info.screen_win.width =
 					(0 ==
 					 fb_para->output_width) ? src_width : fb_para->
 					output_width;
@@ -2095,7 +2095,6 @@ config.info.screen_win.height =1080;
 					(0 ==
 					 fb_para->output_height) ? src_width : fb_para->
 					output_height;
-
 */
 			}
 
