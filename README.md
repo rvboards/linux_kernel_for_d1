@@ -4,6 +4,12 @@ Note: Please update the RVBoards image to V0.5 or above
 
 ## Generate the kernel image rvboards_boot.img
 Compile the kernel with./mk-kernel.sh and generate rvboards_img/rvboards_boot.img
+
+Download the cross-compile toolchain and configure CROSS_COMPILE in mk-kernel.sh
+Baidu network disk link:https://pan.baidu.com/s/1-F9YPfm_dGFTlf-rld8OEw 
+Extract code:3o5v
+Note:The cross-compilation toolchain is extracted from the Zhan D1 Nezha Tina SDK. The directory is as follows
+	tina-d1-v1.01/lichee/brandy-2.0/tools/toolchain/riscv64-linux-x86_64-20200528.tar.xz
 ## Replace the kernel image rvboards_boot.img
 ```shell
  #1. Create a new Boot folder in the desktop directory
