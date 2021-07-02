@@ -3,9 +3,14 @@
 Note: Please update the RVBoards image to V0.5 or above
 
 ## Generate the kernel image rvboards_boot.img
-Compile the kernel with./mk-kernel.sh and generate rvboards_img/rvboards_boot.img
-
-Download the cross-compile toolchain and configure CROSS_COMPILE in mk-kernel.sh
+1 Compile the kernel with./mk-kernel.sh and generate rvboards_img/rvboards_boot.img
+	Configure the default config and board.dts
+	1. config
+	   1. cp config_rvboards_d1 .config
+	2. rvboards_dts
+	   1. cd arch/riscv/boot/dts/sunxi/
+	   2. cp board.dts_rvboards_d1 board.dts
+2 Download the cross-compile toolchain and configure CROSS_COMPILE in mk-kernel.sh
 
 Baidu network disk link:https://pan.baidu.com/s/1-F9YPfm_dGFTlf-rld8OEw 
 
